@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IAU অ্যাসাইনমেন্ট কভার পেজ</title>
-<!-- PDF এবং ফন্ট লাইব্রেরি -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>কামিল অ্যাসাইনমেন্ট কভার পেজ তৈরি - Abswer.com </title>
+
+<!-- ফন্ট লাইব্রেরি: Noto Serif Bengali এবং Hind Siliguri -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  /* ডিফল্ট ফন্ট Noto Serif Bengali */
   body {
-    font-family: 'Hind Siliguri', Arial, sans-serif;
+    font-family: 'Noto Serif Bengali', serif;
     background-color: #e0e5ec;
     margin: 0;
     padding: 20px;
@@ -63,7 +65,7 @@
     padding: 12px 15px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    font-family: 'Hind Siliguri', sans-serif;
+    font-family: 'Noto Serif Bengali', serif;
     font-size: 16px;
     box-sizing: border-box;
     transition: all 0.3s;
@@ -77,7 +79,7 @@
   }
   input[readonly] { background-color: #eee; cursor: not-allowed; color: #666; }
 
-  /* জেনারেট বাটন */
+  /* প্রিন্ট বাটন */
   button#gen-btn {
     background: linear-gradient(135deg, #006400 0%, #004d00 100%);
     color: white;
@@ -89,13 +91,13 @@
     font-weight: 700;
     cursor: pointer;
     margin-top: 30px;
-    font-family: 'Hind Siliguri', sans-serif;
+    font-family: 'Noto Serif Bengali', serif;
     box-shadow: 0 4px 15px rgba(0,100,0,0.3);
     transition: transform 0.2s, box-shadow 0.2s;
   }
   button#gen-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,100,0,0.4); }
 
-  /* PDF প্রিভিউ এরিয়া */
+  /* প্রিভিউ এরিয়া */
   #pdf-preview-container {
     background: #525659;
     padding: 60px 20px;
@@ -108,17 +110,17 @@
   /* মূল A4 পেজ */
   #cover-page {
     width: 210mm;
-    height: 297mm;
+    min-height: 297mm;
     background: white;
     padding: 10mm;
     box-sizing: border-box;
     position: relative;
     color: #000;
-    font-family: 'Hind Siliguri', sans-serif;
+    font-family: 'Noto Serif Bengali', serif;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
   }
 
-  /* ডিজাইন বর্ডার (Double Border) */
+  /* ডিজাইন বর্ডার */
   .page-border {
     width: 100%;
     height: 100%;
@@ -142,25 +144,29 @@
   /* হেডার ডিজাইন */
   .header-section { text-align: center; width: 100%; margin-bottom: 10px; }
   
-  /* বিসমিল্লাহ ইমেজ স্টাইল */
   .bismillah-img { 
     width: 150px;
     height: auto;
-    margin-bottom: 10px; 
+    margin-bottom: 15px; 
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
   
-  .uni-logo { width: 100px; height: auto; margin: 0 auto 10px auto; display: block; }
+  .uni-logo { 
+    width: 100px; 
+    height: auto; 
+    margin: 10px auto 10px auto; /* উপরে-নিচে একটু গ্যাপ */
+    display: block; 
+  }
   
   .uni-name {
-    font-size: 30px;
+    font-family: 'Hind Siliguri', sans-serif; /* ফন্ট পরিবর্তন */
+    font-size: 32px;
     font-weight: 700;
     color: #006400;
     line-height: 1.2;
     margin-top: 5px;
-    text-shadow: 0px 0px 1px rgba(0,100,0,0.1);
   }
   
   .affiliation { 
@@ -170,12 +176,13 @@
     letter-spacing: 1px;
   }
 
-  /* ডাইনামিক মাদ্রাসার নাম */
+  /* মাদ্রাসার নাম - গাঢ় নীল ও ফন্ট পরিবর্তন */
   .madrasa-name {
-    font-size: 26px;
+    font-family: 'Hind Siliguri', sans-serif; /* ফন্ট পরিবর্তন */
+    font-size: 28px;
     font-weight: 700;
-    color: #1a1a1a;
-    margin-top: 5px;
+    color: #00008B; /* Dark Blue */
+    margin-top: 8px;
     line-height: 1.3;
   }
   .madrasa-address { 
@@ -198,18 +205,17 @@
     border-radius: 8px;
     background: #fff;
     display: inline-block;
-    box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
     text-transform: uppercase;
     letter-spacing: 2px;
   }
 
-  /* তথ্যের সারি (ডটেড লাইন) - ফন্ট ছোট করা হয়েছে */
+  /* তথ্যের সারি */
   .info-line {
     display: flex;
     width: 100%;
-    margin-bottom: 10px; /* মার্জিন কমানো হয়েছে */
+    margin-bottom: 10px;
     align-items: flex-end;
-    font-size: 16px; /* 19px থেকে কমিয়ে 16px করা হয়েছে */
+    font-size: 18px;
     line-height: 1.4;
   }
   .label {
@@ -220,19 +226,17 @@
     min-width: 60px;
   }
   
-  /* বিষয় সেকশন */
   .subject-section { 
     width: 100%; 
     margin-bottom: 20px; 
     padding: 0 10px;
   }
 
-  /* ডিটেইলস কন্টেইনার */
   .details-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 25px; /* গ্যাপ কমানো হয়েছে */
+    gap: 25px;
     margin-top: 5px;
   }
   
@@ -242,20 +246,20 @@
     flex-direction: column;
   }
 
+  /* হেডিং স্টাইল - বড় এবং সেন্টার */
   .col-header {
-    text-align: left;
+    text-align: center;
     font-weight: 700;
-    font-size: 18px; /* 20px থেকে কমিয়ে 18px */
-    margin-bottom: 12px;
+    font-size: 24px;
+    margin-bottom: 15px;
     border-bottom: 2px solid #000;
-    display: inline-block;
-    padding-bottom: 4px;
+    display: block;
+    padding-bottom: 5px;
     width: 100%;
   }
 
-  /* রচনায় অংশের জন্য লেবেল উইডথ ফিক্স */
   .details-col .label {
-    min-width: 100px;
+    min-width: 110px;
   }
 
   .value-area {
@@ -265,29 +269,59 @@
     padding-left: 10px;
     position: relative;
     top: -4px;
-    min-height: 22px; /* হাইট কমানো হয়েছে */
+    min-height: 24px;
   }
 
-  /* ফুটার */
   .footer-section {
     margin-top: auto;
     width: 100%;
     text-align: center;
-    font-size: 15px; /* 17px থেকে কমিয়ে 15px */
+    font-size: 16px;
     font-weight: 700;
     padding-top: 20px;
   }
 
-  /* প্রিন্ট ও মোবাইল রেসপন্সিভনেস */
+  /* প্রিন্ট করার জন্য বিশেষ CSS */
+  @media print {
+    body { 
+      background: white; 
+      padding: 0; 
+      margin: 0; 
+    }
+    .input-section, button#gen-btn { 
+      display: none !important; 
+    }
+    #pdf-preview-container {
+      background: white;
+      padding: 0;
+      margin: 0;
+      display: block;
+      overflow: visible;
+    }
+    #cover-page {
+      width: 100%;
+      height: 100%;
+      box-shadow: none;
+      padding: 0;
+      margin: 0 auto;
+      page-break-after: always;
+    }
+    .page-border {
+      border: 2px solid #000;
+      width: 100%;
+      height: 98vh;
+    }
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+
+  /* মোবাইল রেসপন্সিভনেস */
   @media (max-width: 600px) {
     .input-grid { grid-template-columns: 1fr; }
     .input-full { grid-column: span 1; }
-    #cover-page { width: 100%; height: auto; padding: 0; }
-    .page-border { border: none; padding: 0; }
-    .inner-border { border: none; padding: 10px; }
-    .details-container { gap: 30px; }
-    .assignment-box { font-size: 20px; padding: 5px 30px; }
-    .uni-name { font-size: 22px; }
+    #cover-page { width: 100%; height: auto; }
   }
 </style>
 </head>
@@ -299,11 +333,11 @@
   <div class="input-grid">
     <div class="input-group input-full">
       <label>মাদ্রাসার নাম:</label>
-      <input type="text" id="in-madrasa" placeholder="উদাহরণ: জামেয়া আহমদিয়া সুন্নিয়া কামিল মাদ্রাসা" oninput="updatePreview()">
+      <input type="text" id="in-madrasa" value="জামেয়া আহমদিয়া সুন্নিয়া কামিল মাদ্রাসা" oninput="updatePreview()">
     </div>
     <div class="input-group input-full">
       <label>মাদ্রাসার ঠিকানা:</label>
-      <input type="text" id="in-address" placeholder="উদাহরণ: ষোলশহর, পাঁচলাইশ, চট্টগ্রাম" oninput="updatePreview()">
+      <input type="text" id="in-address" value="ষোলশহর, পাঁচলাইশ, চট্টগ্রাম" oninput="updatePreview()">
     </div>
   </div>
 
@@ -311,15 +345,15 @@
   <div class="input-grid">
     <div class="input-group input-full">
       <label>অ্যাসাইনমেন্ট শিরোনাম:</label>
-      <input type="text" id="in-title" placeholder="বিষয়..." oninput="updatePreview()">
+      <input type="text" id="in-title" value="উসূলে হাদিস শাস্ত্রের উৎপত্তি ও ক্রমবিকাশ" oninput="updatePreview()">
     </div>
     <div class="input-group">
-      <label>কোর্স শিরোনাম:</label>
-      <input type="text" id="in-course" oninput="updatePreview()">
+      <label>কোর্স নাম:</label>
+      <input type="text" id="in-course" value="টিউটোরিয়াল" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>কোর্স কোড:</label>
-      <input type="text" id="in-code" oninput="updatePreview()">
+      <input type="text" id="in-code" value="৬১১১০৯" oninput="updatePreview()">
     </div>
   </div>
 
@@ -328,22 +362,22 @@
     <div class="input-full"><h4>শিক্ষকের তথ্য (নির্দেশনায়)</h4></div>
     <div class="input-group">
       <label>শিক্ষকের নাম:</label>
-      <input type="text" id="in-tname" oninput="updatePreview()">
+      <input type="text" id="in-tname" value="ড. মাওলানা মোঃ আবুল কাসেম" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>শিক্ষকের পদবি:</label>
-      <input type="text" id="in-desig" oninput="updatePreview()">
+      <input type="text" id="in-desig" value="সহকারী অধ্যাপক" oninput="updatePreview()">
     </div>
 
     <!-- শিক্ষার্থী -->
     <div class="input-full"><h4>শিক্ষার্থীর তথ্য (রচনায়)</h4></div>
     <div class="input-group">
       <label>নাম:</label>
-      <input type="text" id="in-sname" oninput="updatePreview()">
+      <input type="text" id="in-sname" value="মোঃ আব্দুল্লাহ আল মামুন" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>রেজিঃ নং:</label>
-      <input type="text" id="in-reg" oninput="updatePreview()">
+      <input type="text" id="in-reg" value="১৯১৮৭২৩৪৫৬" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>শ্রেণি (ফিক্সড):</label>
@@ -352,14 +386,14 @@
     <div class="input-group">
       <label>পর্ব:</label>
       <select id="in-part" onchange="updatePreview()">
-        <option value="১ম পর্ব">১ম পর্ব</option>
+        <option value="১ম পর্ব" selected>১ম পর্ব</option>
         <option value="২য় পর্ব">২য় পর্ব</option>
       </select>
     </div>
     <div class="input-group">
       <label>বিভাগ:</label>
       <select id="in-dept" onchange="updatePreview()">
-        <option value="আল হাদিস">আল হাদিস</option>
+        <option value="আল হাদিস" selected>আল হাদিস</option>
         <option value="আত তাফসির">আত তাফসির</option>
         <option value="আল ফিকহ">আল ফিকহ</option>
         <option value="আল আদাব">আল আদাব</option>
@@ -367,19 +401,19 @@
     </div>
     <div class="input-group">
       <label>সেশন:</label>
-      <input type="text" id="in-session" placeholder="২০২৪-২০২৫" oninput="updatePreview()">
+      <input type="text" id="in-session" value="২০২৪-২০২৫" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>পরীক্ষার বছর:</label>
-      <input type="text" id="in-exam-year" placeholder="২০২৫" oninput="updatePreview()">
+      <input type="text" id="in-exam-year" value="২০২৪" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>জমাদানের তারিখ:</label>
-      <input type="date" id="in-date" onchange="updatePreview()">
+      <input type="date" id="in-date" value="2026-01-28" onchange="updatePreview()">
     </div>
   </div>
 
-  <button id="gen-btn" onclick="generatePDF()">PDF ডাউনলোড করুন</button>
+  <button id="gen-btn" onclick="printPage()">🖨️ কভার PDF প্রিন্ট / সেভ করুন</button>
 </div>
 
 <!-- প্রিভিউ এরিয়া (A4 ডকুমেন্ট) -->
@@ -393,9 +427,11 @@
           <!-- বিসমিল্লাহ ইমেজ -->
           <img src="bismillah.png" class="bismillah-img" alt="Bismillah" crossorigin="anonymous">
           
+          <!-- নাম উপরে, লোগো নিচে -->
+          <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
+          
           <img src="iau-logo.png" class="uni-logo" id="main-logo" alt="Logo" crossorigin="anonymous">
           
-          <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
           <div class="affiliation">এর অধিভুক্ত</div>
 
           <div class="madrasa-name" id="out-madrasa">মাদ্রাসার নাম...</div>
@@ -514,38 +550,13 @@
     }
   }
 
-  async function generatePDF() {
-    const { jsPDF } = window.jspdf;
-    const element = document.getElementById('cover-page');
-    const btn = document.getElementById('gen-btn');
-    const originalText = btn.innerText;
-
-    btn.innerText = "প্রসেসিং হচ্ছে...";
-    btn.disabled = true;
-
-    try {
-      // PDF এর জন্য হাই রেজুলেশন সেটিংস
-      const canvas = await html2canvas(element, {
-        scale: 2, 
-        useCORS: true, 
-        allowTaint: true
-      });
-
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = pdf.internal.pageSize.getHeight();
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('IAU_Assignment_Cover.pdf');
-    } catch (error) {
-      console.error(error);
-      alert("দুঃখিত, সমস্যা হয়েছে। দয়া করে আবার চেষ্টা করুন।");
-    } finally {
-      btn.innerText = originalText;
-      btn.disabled = false;
-    }
+  // সরাসরি প্রিন্ট ফাংশন (মোবাইল ও পিসির জন্য সেরা সমাধান)
+  function printPage() {
+    window.print();
   }
+
+  // পেজ লোড হলেই প্রিভিউ আপডেট হবে (ডেমো ডেটা দেখানোর জন্য)
+  window.onload = updatePreview;
 </script>
 
 </body>
