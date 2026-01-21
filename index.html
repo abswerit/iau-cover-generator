@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>কামিল অ্যাসাইনমেন্ট কভার পেজ তৈরি - Abswer.com </title>
 
-<!-- ফন্ট লাইব্রেরি: Noto Serif Bengali এবং Hind Siliguri -->
+<!-- ফন্ট লাইব্রেরি -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@100..900&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-  /* ডিফল্ট ফন্ট Noto Serif Bengali */
+  /* ডিফল্ট ফন্ট */
   body {
     font-family: 'Noto Serif Bengali', serif;
     background-color: #e0e5ec;
     margin: 0;
-    padding: 10px;
+    padding: 20px;
   }
 
   /* ইনপুট ফর্ম ডিজাইন */
@@ -100,11 +100,19 @@
   /* প্রিভিউ এরিয়া */
   #pdf-preview-container {
     background: #525659;
-    padding: 60px 20px;
-    overflow-x: auto;
+    padding: 40px 10px; /* মোবাইলের জন্য প্যাডিং কমানো হলো */
+    overflow: hidden; /* স্ক্রল বন্ধ করে অটো স্কেল হবে */
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     border-radius: 8px;
+    min-height: 400px;
+  }
+
+  /* স্কেলিং র্যাপার */
+  #preview-wrapper {
+    transform-origin: top center;
+    transition: transform 0.3s ease;
   }
 
   /* মূল A4 পেজ */
@@ -133,7 +141,7 @@
     width: 100%;
     height: 100%;
     border: 1px solid #000;
-    padding: 8mm 15mm; /* প্যাডিং কমানো হয়েছে (আগে 10mm ছিল) */
+    padding: 8mm 15mm;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -142,27 +150,27 @@
   }
 
   /* হেডার ডিজাইন */
-  .header-section { text-align: center; width: 100%; margin-bottom: 3px; /* কমানো হয়েছে */ }
+  .header-section { text-align: center; width: 100%; margin-bottom: 5px; }
   
   .bismillah-img { 
-    width: 200px;
+    width: 150px;
     height: auto;
-    margin-bottom: 5px; /* কমানো হয়েছে */
+    margin-bottom: 5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
   
   .uni-logo { 
-    width: 90px; /* লোগো সামান্য ছোট করা হয়েছে */
+    width: 90px;
     height: auto; 
-    margin: 5px auto; /* কমানো হয়েছে */
+    margin: 5px auto;
     display: block; 
   }
   
   .uni-name {
     font-family: 'Hind Siliguri', sans-serif;
-    font-size: 30px; /* সামান্য ছোট */
+    font-size: 30px;
     font-weight: 700;
     color: #006400;
     line-height: 1.1;
@@ -179,7 +187,7 @@
   /* মাদ্রাসার নাম */
   .madrasa-name {
     font-family: 'Hind Siliguri', sans-serif;
-    font-size: 26px; /* সামান্য ছোট */
+    font-size: 26px;
     font-weight: 700;
     color: #00008B;
     margin-top: 5px;
@@ -187,7 +195,7 @@
   }
   .madrasa-address { 
     font-size: 15px; 
-    margin-bottom: 10px; /* কমানো হয়েছে */
+    margin-bottom: 10px;
     color: #444; 
   }
 
@@ -195,27 +203,28 @@
   .assignment-box-container {
     width: 100%;
     text-align: center;
-    margin: 5px 0 15px 0; /* মার্জিন কমানো হয়েছে */
+    margin: 5px 0 20px 0;
   }
   .assignment-box {
     border: 2px solid #000;
     padding: 6px 40px;
-    font-size: 24px; /* ফন্ট সামান্য কমানো */
+    font-size: 24px;
     font-weight: 700;
     border-radius: 8px;
     background: #fff;
     display: inline-block;
     text-transform: uppercase;
+    letter-spacing: 2px;
   }
 
   /* তথ্যের সারি */
   .info-line {
     display: flex;
     width: 100%;
-    margin-bottom: 6px; /* লাইন গ্যাপ কমানো হয়েছে (আগে 10 ছিল) */
+    margin-bottom: 10px;
     align-items: flex-end;
-    font-size: 17px; /* ফন্ট সামান্য ছোট */
-    line-height: 1.3;
+    font-size: 17px;
+    line-height: 1.4;
   }
   .label {
     font-weight: 700;
@@ -227,7 +236,7 @@
   
   .subject-section { 
     width: 100%; 
-    margin-bottom: 15px; /* কমানো হয়েছে */
+    margin-bottom: 20px;
     padding: 0 10px;
   }
 
@@ -235,7 +244,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 15px; /* সেকশন গ্যাপ কমানো হয়েছে (আগে 25 ছিল) */
+    gap: 20px;
     margin-top: 5px;
   }
   
@@ -243,18 +252,21 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 
-  /* হেডিং স্টাইল */
+  /* হেডিং স্টাইল - শেপ */
   .col-header {
     text-align: center;
     font-weight: 700;
-    font-size: 22px; /* সামান্য ছোট */
-    margin-bottom: 8px; /* কমানো হয়েছে */
-    border-bottom: 2px solid #000;
-    display: block;
-    padding-bottom: 3px;
-    width: 100%;
+    font-size: 22px;
+    margin-bottom: 15px;
+    border: 2px solid #000;
+    border-radius: 50px;
+    padding: 5px 40px;
+    display: inline-block;
+    width: auto;
+    background-color: #fff;
   }
 
   .details-col .label {
@@ -271,29 +283,29 @@
     min-height: 22px;
   }
 
-  /* ফুটার - তারিখের জন্য */
+  /* ফুটার - তারিখ */
   .footer-section {
     margin-top: auto;
     width: 100%;
     text-align: center;
     font-size: 16px;
     font-weight: 700;
-    padding-top: 10px; /* কমানো হয়েছে */
+    padding-top: 15px;
     padding-bottom: 5px;
   }
 
-  /* প্রিন্ট করার জন্য বিশেষ CSS (ফিক্সড) */
+  /* প্রিন্ট CSS - ফিক্সড A4 */
   @media print {
     @page {
       size: A4;
-      margin: 0; /* ব্রাউজার মার্জিন জিরো করা */
+      margin: 0;
     }
     body { 
       background: white; 
       padding: 0; 
       margin: 0; 
     }
-    .input-section, button#gen-btn { 
+    .input-section, button#gen-btn, .print-note { 
       display: none !important; 
     }
     #pdf-preview-container {
@@ -303,13 +315,19 @@
       display: block;
       width: 210mm;
       height: 297mm;
-      overflow: hidden; /* অতিরিক্ত অংশ কেটে ফেলা */
+      overflow: hidden;
+    }
+    /* প্রিন্টের সময় স্কেলিং রিসেট করা */
+    #preview-wrapper {
+      transform: none !important;
+      width: 100%;
+      height: 100%;
     }
     #cover-page {
       width: 210mm;
-      height: 296mm; /* ১ মিমি কমানো হয়েছে সেফটির জন্য */
+      height: 296mm; /* সেফটি মার্জিন */
       box-shadow: none;
-      padding: 10mm; /* মার্জিন */
+      padding: 10mm;
       margin: 0 auto;
       page-break-after: avoid;
       box-sizing: border-box;
@@ -317,7 +335,7 @@
     .page-border {
       border: 2px solid #000;
       width: 100%;
-      height: 100%; /* পেজের পুরোটা জুড়ে */
+      height: 100%;
     }
     * {
       -webkit-print-color-adjust: exact !important;
@@ -329,7 +347,11 @@
   @media (max-width: 600px) {
     .input-grid { grid-template-columns: 1fr; }
     .input-full { grid-column: span 1; }
-    #cover-page { width: 100%; height: auto; }
+    /* প্রিভিউ কন্টেইনার ফ্লেক্সিবল রাখা */
+    #pdf-preview-container {
+      align-items: flex-start;
+      overflow: hidden;
+    }
   }
 </style>
 </head>
@@ -422,107 +444,105 @@
   </div>
 
   <button id="gen-btn" onclick="printPage()">🖨️ কভার PDF প্রিন্ট / সেভ করুন</button>
+  <p class="print-note" style="text-align: center; color: #d32f2f; font-size: 15px; margin-top: 15px; font-weight: bold; background: #fff3e0; padding: 10px; border-radius: 5px;">
+    ⚠️ গুরুত্বপূর্ণ: প্রিন্ট প্রিভিউ উইন্ডোতে <b>"More settings"</b> থেকে <b>"Background graphics"</b> অপশনটি অবশ্যই টিক দিন, অন্যথায় ডিজাইন ও বর্ডার দেখা যাবে না।
+  </p>
 </div>
 
 <!-- প্রিভিউ এরিয়া (A4 ডকুমেন্ট) -->
 <div id="pdf-preview-container">
-  <div id="cover-page">
-    <div class="page-border">
-      <div class="inner-border">
-      
-        <!-- হেডার -->
-        <div class="header-section">
-          <!-- বিসমিল্লাহ ইমেজ -->
-          <img src="bismillah.png" class="bismillah-img" alt="Bismillah" crossorigin="anonymous">
-          
-          <!-- নাম উপরে, লোগো নিচে -->
-          <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
-          
-          <img src="iau-logo.png" class="uni-logo" id="main-logo" alt="Logo" crossorigin="anonymous">
-          
-          <div class="affiliation">এর অধিভুক্ত</div>
-
-          <div class="madrasa-name" id="out-madrasa">মাদ্রাসার নাম...</div>
-          <div class="madrasa-address" id="out-address">মাদ্রাসার ঠিকানা...</div>
-        </div>
-
-        <!-- অ্যাসাইনমেন্ট বক্স -->
-        <div class="assignment-box-container">
-          <div class="assignment-box">অ্যাসাইনমেন্ট</div>
-        </div>
-
-        <!-- বিষয় ও কোর্স -->
-        <div class="subject-section">
-          <div class="info-line">
-            <span class="label">শিরোনাম:</span>
-            <span class="value-area" id="out-title"></span>
+  <!-- স্কেলিং র্যাপার -->
+  <div id="preview-wrapper">
+    <div id="cover-page">
+      <div class="page-border">
+        <div class="inner-border">
+        
+          <!-- হেডার -->
+          <div class="header-section">
+            <img src="bismillah.png" class="bismillah-img" alt="Bismillah" crossorigin="anonymous">
+            <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
+            <img src="iau-logo.png" class="uni-logo" id="main-logo" alt="Logo" crossorigin="anonymous">
+            <div class="affiliation">এর অধিভুক্ত</div>
+            <div class="madrasa-name" id="out-madrasa">মাদ্রাসার নাম...</div>
+            <div class="madrasa-address" id="out-address">মাদ্রাসার ঠিকানা...</div>
           </div>
-          <div class="info-line">
-            <span class="label">কোর্স শিরোনাম:</span>
-            <span class="value-area" id="out-course"></span>
-          </div>
-          <div class="info-line">
-            <span class="label">কোর্স কোড:</span>
-            <span class="value-area" id="out-code"></span>
-          </div>
-        </div>
 
-        <!-- মেইন কনটেন্ট (উপরে-নিচে) -->
-        <div class="details-container">
-          <!-- উপরে: নির্দেশনায় -->
-          <div class="details-col">
-            <div class="col-header">নির্দেশনায়</div>
+          <!-- অ্যাসাইনমেন্ট বক্স -->
+          <div class="assignment-box-container">
+            <div class="assignment-box">অ্যাসাইনমেন্ট</div>
+          </div>
+
+          <!-- বিষয় ও কোর্স -->
+          <div class="subject-section">
             <div class="info-line">
-              <span class="label">শিক্ষকের নাম:</span>
-              <span class="value-area" id="out-tname"></span>
+              <span class="label">অ্যাসাইনমেন্ট শিরোনাম:</span>
+              <span class="value-area" id="out-title"></span>
             </div>
             <div class="info-line">
-              <span class="label">পদবি:</span>
-              <span class="value-area" id="out-desig"></span>
+              <span class="label">কোর্স শিরোনাম:</span>
+              <span class="value-area" id="out-course"></span>
+            </div>
+            <div class="info-line">
+              <span class="label">কোর্স কোড:</span>
+              <span class="value-area" id="out-code"></span>
             </div>
           </div>
 
-          <!-- নিচে: রচনায় -->
-          <div class="details-col">
-            <div class="col-header">রচনায়</div>
-            <div class="info-line">
-              <span class="label">নাম:</span>
-              <span class="value-area" id="out-sname"></span>
+          <!-- মেইন কনটেন্ট -->
+          <div class="details-container">
+            <div class="details-col">
+              <div class="col-header">নির্দেশনায়</div>
+              <div class="info-line">
+                <span class="label">শিক্ষকের নাম:</span>
+                <span class="value-area" id="out-tname"></span>
+              </div>
+              <div class="info-line">
+                <span class="label">পদবি:</span>
+                <span class="value-area" id="out-desig"></span>
+              </div>
             </div>
-            <div class="info-line">
-              <span class="label">রেজিঃ নং:</span>
-              <span class="value-area" id="out-reg"></span>
-            </div>
-            <div class="info-line">
-              <span class="label">শ্রেণি:</span>
-              <span class="value-area" id="out-class">কামিল (স্নাতকোত্তর)</span>
-            </div>
-            <div class="info-line">
-              <span class="label">পর্ব:</span>
-              <span class="value-area" id="out-part">১ম পর্ব</span>
-            </div>
-            <div class="info-line">
-              <span class="label">বিভাগ:</span>
-              <span class="value-area" id="out-dept">আল হাদিস</span>
-            </div>
-            <div class="info-line">
-              <span class="label">সেশন:</span>
-              <span class="value-area" id="out-session"></span>
-            </div>
-            <div class="info-line">
-              <span class="label">পরীক্ষার বছর:</span>
-              <span class="value-area" id="out-exam-year"></span>
+
+            <div class="details-col">
+              <div class="col-header">রচনায়</div>
+              <div class="info-line">
+                <span class="label">নাম:</span>
+                <span class="value-area" id="out-sname"></span>
+              </div>
+              <div class="info-line">
+                <span class="label">রেজিঃ নং:</span>
+                <span class="value-area" id="out-reg"></span>
+              </div>
+              <div class="info-line">
+                <span class="label">শ্রেণি:</span>
+                <span class="value-area" id="out-class">কামিল (স্নাতকোত্তর)</span>
+              </div>
+              <div class="info-line">
+                <span class="label">পর্ব:</span>
+                <span class="value-area" id="out-part">১ম পর্ব</span>
+              </div>
+              <div class="info-line">
+                <span class="label">বিভাগ:</span>
+                <span class="value-area" id="out-dept">আল হাদিস</span>
+              </div>
+              <div class="info-line">
+                <span class="label">সেশন:</span>
+                <span class="value-area" id="out-session"></span>
+              </div>
+              <div class="info-line">
+                <span class="label">পরীক্ষার বছর:</span>
+                <span class="value-area" id="out-exam-year"></span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- ফুটার -->
-        <div class="footer-section">
-          জমাদানের তারিখ: <span id="out-date">../../....</span> খ্রি.
-        </div>
-      
-      </div> <!-- End Inner Border -->
-    </div> <!-- End Page Border -->
+          <!-- ফুটার -->
+          <div class="footer-section">
+            জমাদানের তারিখ: <span id="out-date">../../....</span> খ্রি.
+          </div>
+        
+        </div> <!-- End Inner Border -->
+      </div> <!-- End Page Border -->
+    </div>
   </div>
 </div>
 
@@ -537,17 +557,14 @@
   function updatePreview() {
     const ids = ['madrasa', 'address', 'title', 'course', 'code', 'tname', 'desig', 'sname', 'reg', 'session', 'exam-year'];
     
-    // টেক্সট ফিল্ড আপডেট
     ids.forEach(id => {
       document.getElementById('out-' + id).innerText = document.getElementById('in-' + id).value;
     });
 
-    // ফিক্সড/সিলেক্ট ফিল্ড আপডেট
     document.getElementById('out-class').innerText = document.getElementById('in-class').value;
     document.getElementById('out-part').innerText = document.getElementById('in-part').value;
     document.getElementById('out-dept').innerText = document.getElementById('in-dept').value;
 
-    // তারিখ আপডেট
     const dateInput = document.getElementById('in-date').value;
     if(dateInput) {
       const parts = dateInput.split("-");
@@ -558,16 +575,44 @@
     }
   }
 
-  // সরাসরি প্রিন্ট ফাংশন (মোবাইল ও পিসির জন্য সেরা সমাধান)
   function printPage() {
     window.print();
   }
 
-  // পেজ লোড হলেই প্রিভিউ আপডেট হবে (ডেমো ডেটা দেখানোর জন্য)
-  window.onload = updatePreview;
+  // অটো-স্কেলিং ফাংশন (মোবাইলের জন্য)
+  function fitPreview() {
+    const container = document.getElementById('pdf-preview-container');
+    const wrapper = document.getElementById('preview-wrapper');
+    const cover = document.getElementById('cover-page');
+    
+    // A4 width in px (approx) = 794px at 96dpi
+    const a4Width = 794; 
+    const containerWidth = container.offsetWidth;
+    
+    // প্যাডিং বাদ দিয়ে ক্যালকুলেশন
+    const availableWidth = containerWidth - 20; 
+
+    if (availableWidth < a4Width) {
+      const scale = availableWidth / a4Width;
+      wrapper.style.transform = `scale(${scale})`;
+      // হাইট এডজাস্টমেন্ট যাতে নিচে সাদা জায়গা না থাকে
+      const a4Height = 1123; // 297mm in px
+      wrapper.style.height = `${a4Height * scale}px`;
+      wrapper.style.width = `${a4Width * scale}px`; // প্রস্থও ঠিক রাখা
+    } else {
+      wrapper.style.transform = 'none';
+      wrapper.style.height = 'auto';
+      wrapper.style.width = 'auto';
+    }
+  }
+
+  window.onload = function() {
+    updatePreview();
+    fitPreview();
+  };
+  
+  window.onresize = fitPreview;
 </script>
 
 </body>
 </html>
-
-
