@@ -97,7 +97,7 @@
   }
   button#gen-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,100,0,0.4); }
 
-  /* প্রিভিউ এরিয়া */
+  /* প্রিভিউ এরিয়া */
   #pdf-preview-container {
     background: #525659;
     padding: 60px 20px;
@@ -281,8 +281,12 @@
     padding-top: 20px;
   }
 
-  /* প্রিন্ট করার জন্য বিশেষ CSS */
+  /* প্রিন্ট করার জন্য বিশেষ CSS (ফিক্সড) */
   @media print {
+    @page {
+      size: A4;
+      margin: 0; /* ব্রাউজার মার্জিন জিরো করা */
+    }
     body { 
       background: white; 
       padding: 0; 
@@ -296,20 +300,23 @@
       padding: 0;
       margin: 0;
       display: block;
-      overflow: visible;
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden; /* অতিরিক্ত অংশ কেটে ফেলা */
     }
     #cover-page {
-      width: 100%;
-      height: 100%;
+      width: 210mm;
+      height: 296mm; /* ১ মিমি কমানো হয়েছে সেফটির জন্য */
       box-shadow: none;
-      padding: 0;
+      padding: 10mm; /* মার্জিন */
       margin: 0 auto;
-      page-break-after: always;
+      page-break-after: avoid;
+      box-sizing: border-box;
     }
     .page-border {
       border: 2px solid #000;
       width: 100%;
-      height: 98vh;
+      height: 100%; /* পেজের পুরোটা জুড়ে */
     }
     * {
       -webkit-print-color-adjust: exact !important;
@@ -333,7 +340,7 @@
   <div class="input-grid">
     <div class="input-group input-full">
       <label>মাদ্রাসার নাম:</label>
-      <input type="text" id="in-madrasa" value="জামেয়া আহমদিয়া সুন্নিয়া কামিল মাদ্রাসা" oninput="updatePreview()">
+      <input type="text" id="in-madrasa" value="জামেয়া আহমদিয়া সুন্নিয়া কামিল মাদ্রাসা" oninput="updatePreview()">
     </div>
     <div class="input-group input-full">
       <label>মাদ্রাসার ঠিকানা:</label>
@@ -349,7 +356,7 @@
     </div>
     <div class="input-group">
       <label>কোর্স নাম:</label>
-      <input type="text" id="in-course" value="টিউটোরিয়াল" oninput="updatePreview()">
+      <input type="text" id="in-course" value="টিউটোরিয়াল" oninput="updatePreview()">
     </div>
     <div class="input-group">
       <label>কোর্স কোড:</label>
@@ -359,7 +366,7 @@
 
   <div class="input-grid">
     <!-- শিক্ষক -->
-    <div class="input-full"><h4>শিক্ষকের তথ্য (নির্দেশনায়)</h4></div>
+    <div class="input-full"><h4>শিক্ষকের তথ্য (নির্দেশনায়)</h4></div>
     <div class="input-group">
       <label>শিক্ষকের নাম:</label>
       <input type="text" id="in-tname" value="মাওলানা মোহাম্মদ আবুল হাসানাত আল-কাদেরী" oninput="updatePreview()">
@@ -370,7 +377,7 @@
     </div>
 
     <!-- শিক্ষার্থী -->
-    <div class="input-full"><h4>শিক্ষার্থীর তথ্য (রচনায়)</h4></div>
+    <div class="input-full"><h4>শিক্ষার্থীর তথ্য (রচনায়)</h4></div>
     <div class="input-group">
       <label>নাম:</label>
       <input type="text" id="in-sname" value="মোঃ আব্দুল্লাহ আল মামুন" oninput="updatePreview()">
@@ -387,7 +394,7 @@
       <label>পর্ব:</label>
       <select id="in-part" onchange="updatePreview()">
         <option value="১ম পর্ব" selected>১ম পর্ব</option>
-        <option value="২য় পর্ব">২য় পর্ব</option>
+        <option value="২য় পর্ব">২য় পর্ব</option>
       </select>
     </div>
     <div class="input-group">
@@ -416,7 +423,7 @@
   <button id="gen-btn" onclick="printPage()">🖨️ কভার PDF প্রিন্ট / সেভ করুন</button>
 </div>
 
-<!-- প্রিভিউ এরিয়া (A4 ডকুমেন্ট) -->
+<!-- প্রিভিউ এরিয়া (A4 ডকুমেন্ট) -->
 <div id="pdf-preview-container">
   <div id="cover-page">
     <div class="page-border">
@@ -428,7 +435,7 @@
           <img src="bismillah.png" class="bismillah-img" alt="Bismillah" crossorigin="anonymous">
           
           <!-- নাম উপরে, লোগো নিচে -->
-          <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
+          <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
           
           <img src="iau-logo.png" class="uni-logo" id="main-logo" alt="Logo" crossorigin="anonymous">
           
@@ -443,7 +450,7 @@
           <div class="assignment-box">অ্যাসাইনমেন্ট</div>
         </div>
 
-        <!-- বিষয় ও কোর্স -->
+        <!-- বিষয় ও কোর্স -->
         <div class="subject-section">
           <div class="info-line">
             <span class="label">অ্যাসাইনমেন্ট শিরোনাম:</span>
@@ -461,9 +468,9 @@
 
         <!-- মেইন কনটেন্ট (উপরে-নিচে) -->
         <div class="details-container">
-          <!-- উপরে: নির্দেশনায় -->
+          <!-- উপরে: নির্দেশনায় -->
           <div class="details-col">
-            <div class="col-header">নির্দেশনায়</div>
+            <div class="col-header">নির্দেশনায়</div>
             <div class="info-line">
               <span class="label">শিক্ষকের নাম:</span>
               <span class="value-area" id="out-tname"></span>
@@ -474,9 +481,9 @@
             </div>
           </div>
 
-          <!-- নিচে: রচনায় -->
+          <!-- নিচে: রচনায় -->
           <div class="details-col">
-            <div class="col-header">রচনায়</div>
+            <div class="col-header">রচনায়</div>
             <div class="info-line">
               <span class="label">নাম:</span>
               <span class="value-area" id="out-sname"></span>
@@ -561,4 +568,3 @@
 
 </body>
 </html>
-
