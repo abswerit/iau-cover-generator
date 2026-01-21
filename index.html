@@ -240,13 +240,6 @@
 
 <div class="input-section">
   <h3>প্রতিষ্ঠান ও অ্যাসাইনমেন্ট তথ্য</h3>
-  <!-- লোগো আপলোডার -->
-  <div class="logo-upload input-full" onclick="document.getElementById('logo-uploader').click()">
-    📷 লোগো পরিবর্তন করতে এখানে ক্লিক করুন
-    <br><span style="font-size:12px; font-weight:normal;">(যদি ডিফল্ট লোগো PDF-এ না আসে তবে আপনার ডিভাইসের লোগো ব্যবহার করুন)</span>
-    <input type="file" id="logo-uploader" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">
-  </div>
-  <br>
 
   <div class="input-grid">
     <div class="input-group input-full">
@@ -266,7 +259,7 @@
       <input type="text" id="in-title" placeholder="বিষয়..." oninput="updatePreview()">
     </div>
     <div class="input-group">
-      <label>কোর্স নাম:</label>
+      <label>কোর্স শিরোনাম:</label>
       <input type="text" id="in-course" oninput="updatePreview()">
     </div>
     <div class="input-group">
@@ -346,7 +339,6 @@
         <img src="iau-logo.png" class="uni-logo" id="main-logo" alt="Logo" crossorigin="anonymous">
         
         <div class="uni-name">ইসলামি আরবি বিশ্ববিদ্যালয়, ঢাকা</div>
-        <div class="uni-sub">ISLAMIC ARABIC UNIVERSITY</div>
         <div class="affiliation">এর অধিভুক্ত</div>
 
         <div class="madrasa-name" id="out-madrasa">মাদ্রাসার নাম...</div>
@@ -510,3 +502,4 @@
 
 </body>
 </html>
+
