@@ -19,6 +19,17 @@
     padding: 20px;
   }
 
+  /* সাইট ব্র্যান্ডিং লোগো (শুধুমাত্র ওয়েবসাইটে দেখাবে) */
+  .site-branding {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .site-branding img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+  }
+
   /* ইনপুট ফর্ম ডিজাইন */
   .input-section {
     background: #ffffff;
@@ -100,18 +111,19 @@
   /* প্রিভিউ এরিয়া */
   #pdf-preview-container {
     background: #525659;
-    padding: 40px 10px; /* মোবাইলের জন্য প্যাডিং কমানো হলো */
-    overflow: hidden; /* স্ক্রল বন্ধ করে অটো স্কেল হবে */
+    padding: 40px 10px; /* মোবাইলে ডানে-বামে ১০পিক্সেল প্যাডিং */
+    overflow: hidden;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* ডেস্কটপের জন্য সেন্টার */
     align-items: flex-start;
     border-radius: 8px;
     min-height: 400px;
   }
 
-  /* স্কেলিং র্যাপার */
+  /* স্কেলিং র্যাপার - ফিক্সড */
   #preview-wrapper {
-    transform-origin: top center;
+    /* টপ-লেফট থেকে স্কেল হবে যাতে মোবাইলে বাম পাশ থেকে শুরু হয় */
+    transform-origin: top left; 
     transition: transform 0.3s ease;
   }
 
@@ -305,7 +317,8 @@
       padding: 0; 
       margin: 0; 
     }
-    .input-section, button#gen-btn, .print-note { 
+    /* .site-branding ক্লাসে Logo.gif থাকবে, যা প্রিন্টে হাইড করা হবে */
+    .site-branding, .input-section, button#gen-btn, .print-note { 
       display: none !important; 
     }
     #pdf-preview-container {
@@ -317,7 +330,7 @@
       height: 297mm;
       overflow: hidden;
     }
-    /* প্রিন্টের সময় স্কেলিং রিসেট করা */
+    /* প্রিন্টের সময় স্কেলিং রিসেট */
     #preview-wrapper {
       transform: none !important;
       width: 100%;
@@ -325,7 +338,7 @@
     }
     #cover-page {
       width: 210mm;
-      height: 296mm; /* সেফটি মার্জিন */
+      height: 296mm;
       box-shadow: none;
       padding: 10mm;
       margin: 0 auto;
@@ -347,8 +360,9 @@
   @media (max-width: 600px) {
     .input-grid { grid-template-columns: 1fr; }
     .input-full { grid-column: span 1; }
-    /* প্রিভিউ কন্টেইনার ফ্লেক্সিবল রাখা */
     #pdf-preview-container {
+      /* মোবাইলের জন্য বামে এলাইনমেন্ট যাতে top-left জুম ঠিক থাকে */
+      justify-content: flex-start; 
       align-items: flex-start;
       overflow: hidden;
     }
@@ -356,6 +370,11 @@
 </style>
 </head>
 <body>
+
+<!-- ওয়েবসাইটের লোগো (শুধুমাত্র স্ক্রিনে দেখাবে) -->
+<div class="site-branding">
+  <img src="Logo.gif" alt="Abswer Logo">
+</div>
 
 <div class="input-section">
   <h3>প্রতিষ্ঠান ও অ্যাসাইনমেন্ট তথ্য</h3>
@@ -378,7 +397,7 @@
       <input type="text" id="in-title" value="উসূলে হাদিস শাস্ত্রের উৎপত্তি ও ক্রমবিকাশ" oninput="updatePreview()">
     </div>
     <div class="input-group">
-      <label>কোর্স নাম:</label>
+      <label>কোর্স শিরোনাম:</label>
       <input type="text" id="in-course" value="টিউটোরিয়াল" oninput="updatePreview()">
     </div>
     <div class="input-group">
@@ -579,14 +598,14 @@
     window.print();
   }
 
-  // অটো-স্কেলিং ফাংশন (মোবাইলের জন্য)
+  // অটো-স্কেলিং ফাংশন (মোবাইলের জন্য ফিক্সড)
   function fitPreview() {
     const container = document.getElementById('pdf-preview-container');
     const wrapper = document.getElementById('preview-wrapper');
-    const cover = document.getElementById('cover-page');
     
     // A4 width in px (approx) = 794px at 96dpi
     const a4Width = 794; 
+    const a4Height = 1123; // A4 height
     const containerWidth = container.offsetWidth;
     
     // প্যাডিং বাদ দিয়ে ক্যালকুলেশন
@@ -595,10 +614,10 @@
     if (availableWidth < a4Width) {
       const scale = availableWidth / a4Width;
       wrapper.style.transform = `scale(${scale})`;
-      // হাইট এডজাস্টমেন্ট যাতে নিচে সাদা জায়গা না থাকে
-      const a4Height = 1123; // 297mm in px
+      // হাইট এডজাস্টমেন্ট
       wrapper.style.height = `${a4Height * scale}px`;
-      wrapper.style.width = `${a4Width * scale}px`; // প্রস্থও ঠিক রাখা
+      // উইডথ টাও এডজাস্ট করতে হবে যাতে কন্টেইনার ওভারফ্লো না করে
+      wrapper.style.width = `${a4Width * scale}px`;
     } else {
       wrapper.style.transform = 'none';
       wrapper.style.height = 'auto';
@@ -616,4 +635,3 @@
 
 </body>
 </html>
-
